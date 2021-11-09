@@ -3,15 +3,12 @@ const axios = require('axios');
 const { Router } = require('express')
 const { API_KEY } = process.env
 const { Genre , Videogame } = require('../db.js');
-
 const router = Router();
-
 
 
 router.get('/', async (req,res)=>{  
    try{
        const generoApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`) // Traigo los datos de la api
-       console.log(generoApi.data)
        generoApi.data.results.forEach(e => {
            Genre.findOrCreate({ // busco y si no encuentro creo
                where:{
