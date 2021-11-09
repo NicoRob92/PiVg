@@ -6,12 +6,16 @@ const { Genre , Videogame } = require('../db.js');
 const router = Router();
 
 router.post('/', async(req,res) =>{
+
+    try{    
     const {name,
          description,
          fecha_de_lanzamiento,
          rating,
-         plataformas
-         } = req.body        
+         plataformas,
+         genre
+         } = req.body
+
         const game = await Videogame.create({
              name:name,
              description:description,
@@ -19,8 +23,12 @@ router.post('/', async(req,res) =>{
              rating:rating,
              plataformas:plataformas
          }) 
-         await game.addGenre(req.body.genre)
-        res.sendStatus(201).json({msg:"prueba"})
+         await game.addGenre(genre)
+        res.status(201).json({msg:"Creado con esssssito"})
+    }catch(err){
+        res.status(404).json(err)
+    }
+
 })
 
 module.exports = router;

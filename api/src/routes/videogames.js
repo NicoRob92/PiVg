@@ -9,28 +9,35 @@ const router = Router();
 router.get('/', async (req,res)=>{  
 
     const  name  = req.query.name
-    if(name){
-        try {
-        let gameapi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`) 
-        
-        let gamedb = await Videogame.findAll({
-            where:{
+    
+          try {
+        if(name !== undefined){
+            let gameapi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)         
+            let gamedb = await Videogame.findAll({
+                where:{
                 name:name
-            }
-        })
-       let totalGames = [gamedb,gameapi.data]
-       return res.json(totalGames)
-
-    }catch{
-      return res.sendStatus(404)
-    }}
-
-   try{
+                }
+            })
+            let totalGames = [gamedb,gameapi.data]
+            return res.json(totalGames)
+        }    
+     
         let gamesapi = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`) // Traigo los datos de la api
-        let gamedb = await Videogame.findAll()
-        let totalGames = [gamedb,gamesapi.data]
-   
-        return res.json(totalGames)
+        let results = gamesapi.data.results
+        let pagina = gamesapi.data.next
+        let gamedb = await Videogame.findAll()        
+        let total =  gamedb.concat(results)
+         for(let i=2;i<6; i++){
+            let next = await axios.get(pagina)
+            let results1 = next.data.results
+            total = total.concat(results1)
+            pagina = next.data.next
+        }        
+     
+        
+
+        console.log(total.length)
+        return res.json(total)
   
    }
    catch{

@@ -6,47 +6,27 @@ const { Genre , Videogame } = require('../db.js');
 const router = Router();
 
 
-/* router.get('/:id', async (req,res)=>{  
+router.get('/:id', async (req,res)=>{  
 
     const  id  = req.params.id
-    if(id){
-        try {
-        let gameapi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`) 
-        let gamedb = await Videogame.findOne({
-            where:{
-                id:id 
-            }
-        })
-        return gameapi ? res.json(gameapi.data) : res.json(gamedb)
-    }catch(err){
-      return res.sendStatus(404).json(err)
-    }}})
- */
 
-router.post('/videogame', async(req,res) =>{
+    if (id.includes('-')){
+        try{
+           let gamedb = await Videogame.findByPk(id, {include: Genre})      
+           if(gamedb) return res.json(gamedb);
 
-   /*  const {name,
-         description,
-         fecha_de_lanzamiento,
-         rating,
-         plataformas
-         } = req.body
-
+        }catch(err){
+            return res.status(404).json({msg:err + 'database'})
+        }
+    }
         
-        const game = await Videogame.create({
-             name:name,
-             description:description,
-             fecha_de_lanzamiento:fecha_de_lanzamiento,
-             rating:rating,
-             plataformas:plataformas
-         })
- */
-       /*   await game.addGenre(req.body.genre) */
+    try {
+       let gameapi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`) 
+       if(gameapi.data) return res.json(gameapi.data);       
+    }catch(err){
+      return res.status(404).json({msg:err})
+    }}
+    
 
-
-        res.sendStatus(201).json({msg:"prueba"})
-
-
-})
-
+)
 module.exports = router;
