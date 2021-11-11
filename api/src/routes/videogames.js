@@ -20,7 +20,10 @@ router.get('/', async (req,res)=>{
             })
             let totalGames = gamedb.concat(gameapi.data.results)
             return res.json(totalGames)
-        }   else{ 
+        } 
+        
+        
+        else{ 
            var games = (num)=>{
                 const n = num/20;
                 
@@ -39,13 +42,16 @@ router.get('/', async (req,res)=>{
             return total;
         }
         
+        let gamedb = await Videogame.findAll({include:Genre})
+        
         let total = await Promise.all(games(100))
         total= total.map(e => {
-            return {data : e.data.results}
+            return e.data.results
         })  
-        
-        console.log(total)
-        return  res.status(200).json(total[0].data[0].name)
+
+        total = total.concat(gamedb)
+       
+        return  res.status(200).json(total)
         }
 })
 
