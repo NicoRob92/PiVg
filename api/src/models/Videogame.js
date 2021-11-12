@@ -14,16 +14,18 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull:false
     },
-    fecha_de_lanzamiento:{
-      type:DataTypes.STRING,
-   
+    released:{
+      type:DataTypes.STRING,   
     },
     rating:{
       type:DataTypes.INTEGER,
       allowNull:false
     },
+    background_image:{
+      type:DataTypes.TEXT,
+    }
   });
 };

@@ -10,31 +10,38 @@ router.post('/', async(req,res) =>{
     try{    
     const {name,
          description,
-         fecha_de_lanzamiento,
+         released,
          rating,
-         plataformas,
-         genre
+         platforms,
+         genres,
+         background_image
          } = req.body
 
-         const plataforma = await Platforms.findOrCreate({
-             where:{
-                name:plataformas
-            }
-        })
+       
 
         const game = await Videogame.create({
              name:name,
              description:description,
-             fecha_de_lanzamiento:fecha_de_lanzamiento,
+             released:released,
              rating:rating,
+             background_image:background_image,
      }) 
 
-        console.log(plataforma)
-        await game.addPlatforms(plataforma[0])
-        await game.addGenre(genre)
+     
+     for(const plat of platforms){
+        let p = await Platforms.findOrCreate({
+            where:{
+                name:plat
+            }
+        })      
+        await game.addPlatforms(p[0])
+     }
+     
+               
+        await game.addGenres(genres)
         res.status(201).json({msg:"Creado con esssssito"})
     }catch(err){
-        res.status(404).json(err)
+        res.status(404).send('errrorrrrr')
     }
 
 })

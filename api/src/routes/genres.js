@@ -7,7 +7,11 @@ const router = Router();
 
 
 router.get('/', async (req,res)=>{  
+
+
+    const generoDb = await Genre.findAll()
    try{
+       if(generoDb.length === 0){
        const generoApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`) // Traigo los datos de la api
        generoApi.data.results.forEach(e => {
            Genre.findOrCreate({ // busco y si no encuentro creo
@@ -16,10 +20,11 @@ router.get('/', async (req,res)=>{
                }
            })
        })
-       const generoDb = await Genre.findAll() //traigo todas las entidades de la base de datos
+       generoDb = await Genre.findAll()
+    }
        res.json(generoDb)
-   }
-   catch{
+    }
+    catch{
        res.sendStatus(404)
    }
    

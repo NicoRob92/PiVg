@@ -2,40 +2,56 @@ require('dotenv').config();
 const axios = require('axios');
 const { Router } = require('express')
 const { API_KEY } = process.env
-const { Genre , Videogame } = require('../db.js');
+const { Genre , Videogame, Platforms } = require('../db.js');
 const router = Router();
 
 
 router.get('/', async (req,res)=>{  
     
-    const  name  = req.query.name
-    
-       
+    const  name  = req.query.name     
         if(name !== undefined){
+            try{
             let gameapi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)         
             let gamedb = await Videogame.findAll({
                 where:{
                 name:name
-                }
-            })
+                }, include: [Genre,Platforms]
+            })          
+            if(gameapi.data.results.length === 0 && gamedb.length === 0) return res.status(404).send('No existe el juego')
             let totalGames = gamedb.concat(gameapi.data.results)
-            return res.json(totalGames)
+            let games = totalGames.map(e => {
+                return {                  
+                    name:e.name,                  
+                    genre:e.genres,
+                    background_image:e.background_image
+            }})
+            if(games.length > 15){
+            let nArr = []            
+            for(let i=1;i <= 15;i++){
+                nArr.push(games[i])
+            }
+            return res.json(nArr)  
+            }
+            
+            res.json(games)
+        }catch{
+            res.status(404).send('No se encontro el videojuego')
+        }
         } 
-        
-        
+               
         else{ 
            var games = (num)=>{
                 const n = num/20;
                 
-                const total =[]
+                let total =[]
                 for(let i=1; i<= n; i++){
                     
                     if(i<2){
                         let game =  axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`) 
-                        total.push(game)   
+                       total = [...total, game]
                }else {
                    let game = axios.get(`https://api.rawg.io/api/games?key=278629b546904ca0b9a55a5a19d6f879&page=${i}`)
-                   total.push(game)
+                    total = [...total,game]
                 }
             }
             
@@ -45,14 +61,19 @@ router.get('/', async (req,res)=>{
         let gamedb = await Videogame.findAll({include:Genre})
         
         let total = await Promise.all(games(100))
-        total= total.map(e => {
-            return e.data.results
-        })  
-
-        total = total.concat(gamedb)
-       
-        return  res.status(200).json(total)
-        }
+        let total2 =[]
+        total= total.map(e => e.data.results.map(r => total2.push(r)))  
+        total2 = total2.concat(gamedb)
+        let games2 = total2.map(e => {
+            return {                  
+                name:e.name,                  
+                genres:e.genres,
+                background_image:e.background_image,
+                
+        }})
+        console.log(games2.length)
+        return  res.status(200).json(games2)
+    }
 })
 
 module.exports = router;
