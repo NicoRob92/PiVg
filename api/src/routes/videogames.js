@@ -20,9 +20,11 @@ router.get('/', async (req,res)=>{
             if(gameapi.data.results.length === 0 && gamedb.length === 0) return res.status(404).send('No existe el juego')
             let totalGames = gamedb.concat(gameapi.data.results)
             let games = totalGames.map(e => {
-                return {                  
+                return {
+                    id:e.id,                  
                     name:e.name,                  
                     genre:e.genres,
+                    rating:e.rating,
                     background_image:e.background_image
             }})
             if(games.length > 15){
@@ -65,8 +67,10 @@ router.get('/', async (req,res)=>{
         total= total.map(e => e.data.results.map(r => total2.push(r)))  
         total2 = total2.concat(gamedb)
         let games2 = total2.map(e => {
-            return {                  
-                name:e.name,                  
+            return {        
+                id:e.id,          
+                name:e.name,
+                rating:e.rating,                  
                 genres:e.genres,
                 background_image:e.background_image,
                 

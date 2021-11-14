@@ -1,0 +1,18 @@
+.conteinerNav{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    backdrop-filter: blur(4px);
+
+}
+
+.butons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border:solid;
+    width: 40%;
+}

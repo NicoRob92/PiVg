@@ -1,20 +1,22 @@
 import './App.css';
-import { Provider } from 'react-redux'
-import store from './redux/store'
-import {BrowserRouter , Route} from 'react-router-dom'
-import Home from './components/Home';
+import Home from './components/Home/Home';
+import Landing from './components/landing/Landing';
+import { BrowserRouter ,Route ,Routes } from 'react-router-dom';
+import Form from './components/Form/Form';
+import { Nav } from './components/Nav/Nav';
 function App() {
   return (
-    <Provider store={store}>
+    
+    <div class="global">
     <BrowserRouter>
-    <div className="App">
-
-      <h1>Henry Videogames</h1>
-
-      <Home/>
-    </div>
+    <Routes>
+    <Route exact path='/' element = {<Landing/>}></Route> 
+    
+    <Route path='/home' element={[<Nav/>,<Home/>]}/>  
+    <Route path= '/create' element={[<Nav/>,<Form/>]}/>
+    </Routes>
     </BrowserRouter>
-    </Provider>    
+    </div> 
 
   );
 }
