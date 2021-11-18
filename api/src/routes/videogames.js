@@ -23,10 +23,12 @@ router.get('/', async (req,res)=>{
                 return {
                     id:e.id,                  
                     name:e.name,                  
-                    genre:e.genres,
+                    genres:e.genres,
                     rating:e.rating,
                     background_image:e.background_image
             }})
+            games = games.filter(e => e.genres.length !== 0)
+            games = games.sort((a,b)=> a.id-b.id)
             if(games.length > 15){
             let nArr = []            
             for(let i=1;i <= 15;i++){
@@ -66,6 +68,8 @@ router.get('/', async (req,res)=>{
         let total2 =[]
         total= total.map(e => e.data.results.map(r => total2.push(r)))  
         total2 = total2.concat(gamedb)
+
+       
         let games2 = total2.map(e => {
             return {        
                 id:e.id,          
@@ -75,7 +79,7 @@ router.get('/', async (req,res)=>{
                 background_image:e.background_image,
                 
         }})
-        console.log(games2.length)
+        games2= games2.sort((a,b)=> a.id-b.id)
         return  res.status(200).json(games2)
     }
 })

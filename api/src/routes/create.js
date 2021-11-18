@@ -28,15 +28,7 @@ router.post('/', async(req,res) =>{
      }) 
 
      
-     for(const plat of platforms){
-        let p = await Platforms.findOrCreate({
-            where:{
-                name:plat
-            }
-        })      
-        await game.addPlatforms(p[0])
-     }
-     
+        await game.addPlatforms(platforms)
                
         await game.addGenres(genres)
         res.status(201).json({msg:"Creado con esssssito"})
