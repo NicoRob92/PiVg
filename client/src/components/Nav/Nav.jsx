@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar/Searchbar";
 import './Nav.css'
 export function Nav(){
 
-const [title, settitle] = useState('')
     return (
       <div className="conteinerNav">
         <div className="search">

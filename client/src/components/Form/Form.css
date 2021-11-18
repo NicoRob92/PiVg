@@ -1,0 +1,167 @@
+.container_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border:solid;    
+    width: 100%;
+    height: 100%;
+}
+
+.container_global{
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border:solid;    
+    width: 60%;
+    height: 100%;
+    background-color: rgba(118, 222, 223,.4);
+    backdrop-filter: blur(7px);
+}
+
+
+/* INPUTS NORMALES */
+
+.input{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    width: 40%;   
+    color:goldenrod;
+    border:none
+
+
+}
+
+.input label{
+    font-size: 1.4rem;
+    font-family: 'Bebas Neue', cursive;
+    margin: 0px;
+    padding: 0px;   
+    text-shadow:
+    0 0 7px black,
+    0 0 10px black,
+    0 0 1px black,
+    0 0 2px black;  
+}
+
+.input input {
+    height: 70%;    
+    border:none;    
+    border-radius: 4px;
+   font-family: 'Anton', sans-serif;
+   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+.input textarea{
+    font-family: 'Anton', sans-serif;
+    width: 52%;
+    border-radius: 4px;
+    border:none;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+
+/* INPUTS GENERO Y PLATS */
+
+.globalGenPlat{
+    display: flex;
+    
+    flex-direction: column;
+    width:50%;
+    justify-content: space-between;
+    align-items:center;
+    
+    
+}
+
+.inputGenPlat{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    width: 80%;   
+    color:goldenrod;
+     
+
+}
+
+.inputGenPlat label{
+    font-size: 1.4rem;
+    font-family: 'Bebas Neue', cursive;
+    margin: 0px;
+    padding: 0px;   
+    text-shadow:
+    0 0 7px black,
+    0 0 10px black,
+    0 0 1px black,
+    0 0 2px black;  
+}
+
+.inputGenPlat select{
+    font-size: .7rem;
+    font-family: 'Anton', sans-serif; 
+    width: 30%;
+    height: 80%;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+
+
+.boxGenPlat{
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    margin-top: 2px;
+    border-radius: 4px;
+    border:none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+
+
+
+.boxGenPlat button{
+    border-radius: 3px;
+    border:none;
+    background-color: #081515;
+    color:goldenrod;
+    font-family: 'Bebas Neue', cursive;
+    margin: 1px;
+    transition: .4s;
+    box-shadow: 0px 10px 15px 3px rgba(0,0,0,0.4);
+
+}
+
+.boxGenPlat button:hover{
+    transform: scale(1.4);
+    transition: .4s;
+}
+
+.enviar {
+    position: relative;
+    left: 15%;
+    font-family: 'Bebas Neue', cursive;
+    color:white;
+    background-color: black;
+    border:none;
+    font-size: 1.2rem;
+    padding: 7px 15px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+
+    
+}
+
+.enviar:hover{
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa;  
+    transition: .4s;
+    
+}

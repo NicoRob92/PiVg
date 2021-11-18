@@ -1,16 +1,15 @@
 import axios from 'axios'
 
-export function addMovieFavorite(payload) {
-    return { type: "ADD_MOVIE_FAVORITE", payload };
-  }
 /* ======-=-=-=--=Filtros-=-=-=-=-=-=-=-=-=--= */
 export function filterGames(payload) {
     return { type: "FILTER_GAMES", payload };
 }
 
+
 export function filterByData(payload){
   return {type: "FILTER_BYDATA" , payload }
 }
+
 
 export function orderbyName(payload){
   return {type: "ORDER_BY_NAME" , payload}
@@ -24,7 +23,37 @@ export function getGames() {
     });
   };      
 };
-  
+
+export function getAGame(name) {  
+  return function(dispatch) {
+    if(name.length !== 0){
+    return axios.get(`http://localhost:3001/videogames?name=${name}`)
+    .then(response => {
+      if(response.data.length !== 0){
+    dispatch({ type: "GET_A_GAME", payload: response.data});
+     }})}else{
+       alert ('Ingrese Juego')
+     }
+    }}
+     
+
+
+export function getDetails(id) {    
+  return function(dispatch) {
+    return axios.get(`http://localhost:3001/videogame/${id}`)
+    .then(response => {
+      console.log(response.data)
+      if(response.data.length !== 0){
+    dispatch({ type: "GET_DETAILS", payload: response.data});
+      }else{
+        alert ('Juego no encontrado')
+      }
+    });
+  };      
+};
+
+
+
 export function getGenres() {    
   return function(dispatch) {
     return axios.get("http://localhost:3001/genres")
@@ -34,4 +63,3 @@ export function getGenres() {
   };      
 };
 
-/* =-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-= */

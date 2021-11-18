@@ -31,7 +31,10 @@
 .global{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
+  height: 97.3vh;
+  border:solid
 
 }
 

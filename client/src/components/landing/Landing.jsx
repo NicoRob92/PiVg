@@ -4,7 +4,7 @@ import './Landing.css'
 
 function Landing(){
     return(
-        <div class="landing">
+        <div className="landing">
             <Link to='/home'><button>Home</button></Link>
         </div>
     )
