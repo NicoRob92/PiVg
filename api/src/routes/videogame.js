@@ -13,8 +13,19 @@ router.get('/:id', async (req,res)=>{
     if (id.includes('-')){
         try{
            let gamedb = await Videogame.findByPk(id, {include: [Genre,Platforms]})      
-           if(gamedb) return res.json(gamedb);
-
+           
+           let game = {
+            name : gamedb.name,
+            background_image: gamedb.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0",
+            genres : gamedb.genres && gamedb.genres.map((p) => p.name),
+            description: gamedb.description,
+            released: gamedb.released,
+            rating:gamedb.rating,
+            platforms:gamedb.platforms && gamedb.platforms.map(e => e.name)
+            
+        }
+        console.log(gamedb)
+        if(game) return res.json(game);
         }catch(err){
             return res.status(404).json({msg:err + 'database'})
         }
@@ -27,11 +38,12 @@ router.get('/:id', async (req,res)=>{
           const game = {
               name : gameapi.data.name,
               background_image: gameapi.data.background_image,
-              genres : gameapi.data.genres,
-              description: gameapi.data.description,
+              genres : gameapi.data.genres && gameapi.data.genres.map((p) => p.name).filter(p => p != null),
+              description: gameapi.data.description_raw,
               released: gameapi.data.released,
-              ranting:gameapi.data.ranting,
-              platforms:gameapi.data.platforms,
+              rating:gameapi.data.rating,
+              platforms:gameapi.data.platforms && gameapi.data.platforms.map((p) =>
+              p.platform.name).filter(p => p != null)
           }
           res.json(game)
        }

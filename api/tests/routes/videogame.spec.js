@@ -13,12 +13,25 @@ describe('Videogame routes', () => {
   before(() => conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
-  }));
-  beforeEach(() => Videogame.sync({ force: true })
-    .then(() => Videogame.create(videogame)));
+  })); 
   describe('GET /videogames', () => {
     it('should get 200', () =>
       agent.get('/videogames').expect(200)
     );
   });
+  it('Deberia devolver 19 generos',async()=>{
+    let genres = await agent.get('/genres')
+    expect(genres.body).length(19)
+  });
+
+  it('Deberia devolver 15 juegos',async()=>{
+    let data = await agent.get('/videogames?name=gta')
+    expect(data.body).length(15)
+  });
+ 
+  
+  
+  
+
+
 });

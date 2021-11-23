@@ -1,0 +1,58 @@
+/* font-family: 'Akronim', cursive;
+font-family: 'Anton', sans-serif;
+font-family: 'Bebas Neue', cursive;
+font-family: 'Ceviche One', cursive;
+font-family: 'Gochi Hand', cursive;
+font-family: 'Henny Penny', cursive;
+ */
+.containerHome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 90%;
+    backdrop-filter: blur(7px);
+}
+
+.selectores{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+.selectores select{
+ border: none;
+ margin: 4px;
+ font-family: 'Anton', sans-serif;
+ background-color: black;
+ color: goldenrod;
+}
+
+.cartas{    
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: rgba(1, 8, 8, 0.4);   
+    width: 80%;
+    height: 90%;   
+}
+
+.cartas img{
+    width: 100%;
+    height: 100%;
+}
+
+.paginadoB{
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginadoB button{
+    border: none;
+    background-color: black;
+    color: goldenrod;
+}
+
+
+

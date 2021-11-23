@@ -1,0 +1,21 @@
+.paginado{
+    display: flex;
+    justify-content: space-evenly;
+   
+    width:50%
+}
+
+.paginado button{
+    border: none;
+    background-color: black;
+    color: goldenrod;
+}
+
+.paginado button:hover{
+    transform: scale(1.1);
+}
+
+.paginado button:focus{
+    opacity: .4;
+    transform: scale(1);
+}

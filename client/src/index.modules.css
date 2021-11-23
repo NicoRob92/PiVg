@@ -1,15 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Akronim&family=Anton&family=Bebas+Neue&family=Ceviche+One&family=Gochi+Hand&family=Henny+Penny&display=swap');
+
+/* font-family: 'Akronim', cursive;
+font-family: 'Anton', sans-serif;
+font-family: 'Bebas Neue', cursive;
+font-family: 'Ceviche One', cursive;
+font-family: 'Gochi Hand', cursive;
+font-family: 'Henny Penny', cursive;
+ */
+ *{
+   max-height: 100vh;
+   max-width: 100vw;
+ }
+ 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-    background-color: black;
+  background-image: url('https://www.wallpapertip.com/wmimgs/91-919830_stick-hd-wallpapers-hd-emran-hasmi-wallpaper-and.jpg');
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   align-content: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  
 }
 
 code {

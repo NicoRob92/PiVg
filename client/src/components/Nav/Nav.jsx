@@ -1,7 +1,7 @@
 import React , {useState} from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/Searchbar";
-import './Nav.css'
+import './Nav.modules.css'
 export function Nav(){
 
     return (
@@ -10,9 +10,10 @@ export function Nav(){
         <SearchBar/>
         </div>
         <div className="butons">
-        <div className="home"> <Link style={{ textDecoration: 'none' }} to= "/home"><p>Home</p></Link></div>
-        <div className="fav"><Link  style={{ textDecoration: 'none' }} to= "/create">Create</Link></div>
+        <div className="home"> <Link Style={'text-decoration: none'} to= "/home"><p>Home</p></Link></div>
+        <div className="fav"><Link  Style={'text-decoration: none'} to= "/create"><p>Create</p></Link></div>
         </div>
+        <div className="title">WikiGames</div>
         </div>
         
     )

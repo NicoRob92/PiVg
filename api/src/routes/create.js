@@ -14,18 +14,17 @@ router.post('/', async(req,res) =>{
          rating,
          platforms,
          genres,
-         background_image
          } = req.body
 
        
 
         const game = await Videogame.create({
+                    
              name:name,
              description:description,
              released:released,
              rating:rating,
-             background_image:background_image,
-     }) 
+             background_image:"https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0"}) 
 
      
         await game.addPlatforms(platforms)

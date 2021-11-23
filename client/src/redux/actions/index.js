@@ -10,10 +10,19 @@ export function filterByData(payload){
   return {type: "FILTER_BYDATA" , payload }
 }
 
+export function filterByDataSearch(payload){
+  return {type: "FILTER_BYDATA_SEARCH" , payload }
+}
+
 
 export function orderbyName(payload){
   return {type: "ORDER_BY_NAME" , payload}
 }
+
+export function orderbyRating(payload){
+  return {type: "ORDER_BY_RATING" , payload}
+}
+
 /* ============PEDIDOS A LA API=============== */
 export function getGames() {    
   return function(dispatch) {

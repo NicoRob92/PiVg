@@ -1,0 +1,223 @@
+@import url('https://getwallpapers.com/wallpaper/full/d/8/f/202080.jpg');
+
+.landing{
+    /* background-color:black; */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.conteinerImages {   
+    position: absolute;
+    top:10px;    
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    width: 70%;
+    height: 70%;
+    flex-direction: row;
+   /*  background-image: url('./vippng.com-paint-splater-png-917496.png'); */
+    background-size: 100% 100%;
+    
+
+}
+
+.imagen{
+    border: double goldenrod;  
+    background-position: center;
+    background-size: 600% 100%;
+    width: 8%;
+    height: 100%;
+    transition: .6s;
+    transform: skewX(-7deg);
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.7);
+    overflow: hidden;
+    
+}
+
+.imagen img{
+    width: 300%;
+    height: 100%;
+    transform: translateX(-50%);
+   
+
+}
+
+.imagen:hover {
+    
+    transform: skewX(-7deg) scale(1.03);
+    transition: .6s;
+}
+
+.imagen1{
+    border: double goldenrod;  
+    background-position: center;
+    background-size: 600% 100%;
+    position: relative;
+    width: 8%;
+    height: 100%;
+    transition: .6s;
+    transform: skewX(-7deg);
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.7);
+    overflow: hidden;
+    top:5%;
+    
+}
+
+.imagen1 img{
+    width: 600%;
+    height: 100%;
+    transform: translateX(-50%);
+   
+
+}
+
+.imagen1:hover {
+    
+    transform: skewX(-7deg) scale(1.03);
+    transition: .6s;
+}
+
+.imagen2{
+    border: double goldenrod;  
+    background-position: center;
+    background-size: 600% 100%;
+    position: relative;
+    width: 8%;
+    height: 100%;
+    transition: .6s;
+    transform: skewX(-7deg);
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.7);
+    overflow: hidden;
+    top:3.8%;
+    
+}
+
+.imagen2 img{
+    width: 600%;
+    height: 100%;
+    transform: translateX(-50%);
+   
+
+}
+
+.imagen2:hover {
+    
+    transform: skewX(-7deg) scale(1.03);
+    transition: .6s;
+}
+.imagen3{
+    border: double goldenrod;  
+    background-position: center;
+    background-size: 600% 100%;
+    position: relative;
+    width: 8%;
+    height: 100%;
+    transition: .6s;
+    transform: skewX(-7deg);
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.7);
+    overflow: hidden;
+    top:2.5%;
+    
+}
+
+.imagen3 img{
+    width: 600%;
+    height: 100%;
+    transform: translateX(-50%);
+   
+
+}
+
+.imagen3:hover {
+    
+    transform: skewX(-7deg) scale(1.03);
+    transition: .6s;
+}
+
+.imagen4{
+    border: double goldenrod;  
+    background-position: center;
+    background-size: 600% 100%;
+    position: relative;
+    width: 8%;
+    height: 100%;
+    transition: .6s;
+    transform: skewX(-7deg);
+    box-shadow: 9px 11px 15px -3px rgba(0,0,0,0.7);
+    overflow: hidden;
+    top:1.2%;
+    
+}
+
+.imagen4 img{
+    width: 600%;
+    height: 100%;
+    transform: translateX(-50%);
+   
+
+}
+
+.imagen4:hover {
+    
+    transform: skewX(-7deg) scale(1.03);
+    transition: .6s;
+}
+
+h1{
+    position: absolute;
+    top: 85%;
+    transform: skewX(-10deg);
+    font-family: 'Akronim', cursive;
+    left: 200px;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.rayon{
+    display: flex;
+    position: relative;
+    width: 15%;
+    top:42%;
+    left:17%; 
+    height: 10%;   
+    border: none;
+    background-size: 100% 100%;
+    font-family: 'Akronim', cursive;  
+    color: white; 
+    font-size: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    transform: skewX(-10deg);
+    text-decoration: none;
+}
+
+.rayon:hover{
+    animation: shake;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    transform: scale(1.3);
+    transition:.6s;
+    transform: skewX(-10deg);
+}
+
+@keyframes shake {
+    0%{ text-shadow: 0 0 10px #000,0 0 5px #000,0 0 40px #000;}
+    1%{text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff5002, 0 0 30px #ff5002, 0 0 40px #ff5002, 0 0 55px #ff5002, 0 0 75px #ff5002;}
+    20%{ text-shadow: 0 0 10px #000,0 0 5px #000,0 0 40px #000;}
+    21%{text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff5002, 0 0 30px #ff5002, 0 0 40px #ff5002, 0 0 55px #ff5002, 0 0 75px #ff5002;}
+    30%{ text-shadow: 0 0 10px #000,0 0 5px #000,0 0 40px #000;}
+    31%{text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff5002, 0 0 30px #ff5002, 0 0 40px #ff5002, 0 0 55px #ff5002, 0 0 75px #ff5002;}
+    50%{ text-shadow: 0 0 10px #000,0 0 5px #000,0 0 40px #000;}
+    51%{text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff5002, 0 0 30px #ff5002, 0 0 40px #ff5002, 0 0 55px #ff5002, 0 0 75px #ff5002;}
+    90%{ text-shadow: 0 0 10px #000,0 0 5px #000,0 0 40px #000;}
+    97%{text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff5002, 0 0 30px #ff5002, 0 0 40px #ff5002, 0 0 55px #ff5002, 0 0 75px #ff5002;}
+        
+}
+
+

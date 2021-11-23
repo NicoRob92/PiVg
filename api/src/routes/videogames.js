@@ -23,9 +23,10 @@ router.get('/', async (req,res)=>{
                 return {
                     id:e.id,                  
                     name:e.name,                  
-                    genres:e.genres,
+                    genres:e.genres && e.genres.map((p) =>
+                    p.name).filter(p => p != null),
                     rating:e.rating,
-                    background_image:e.background_image
+                    background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0"
             }})
             games = games.filter(e => e.genres.length !== 0)
             games = games.sort((a,b)=> a.id-b.id)
@@ -75,8 +76,9 @@ router.get('/', async (req,res)=>{
                 id:e.id,          
                 name:e.name,
                 rating:e.rating,                  
-                genres:e.genres,
-                background_image:e.background_image,
+                genres:e.genres && e.genres.map((p) =>
+                p.name).filter(p => p != null),
+                background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0"
                 
         }})
         games2= games2.sort((a,b)=> a.id-b.id)

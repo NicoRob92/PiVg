@@ -1,0 +1,32 @@
+.conteinerNav{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 7%;
+    backdrop-filter: blur(4px);
+    background-color: rgba(4, 4,4, 0.5);
+    border-bottom:double goldenrod;
+
+}
+
+.butons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;    
+    width: 40%;
+    color: white;
+}
+
+.butons p{
+    color: white;
+    font-family: 'Anton', sans-serif;
+}
+
+.title{
+    color: white;
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+}

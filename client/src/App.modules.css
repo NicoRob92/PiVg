@@ -32,10 +32,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
   width: 100vw;
-  height: 97.3vh;
-  border:solid
-
 }
 
 @keyframes App-logo-spin {
