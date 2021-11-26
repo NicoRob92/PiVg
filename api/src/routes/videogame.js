@@ -21,8 +21,8 @@ router.get('/:id', async (req,res)=>{
             description: gamedb.description,
             released: gamedb.released,
             rating:gamedb.rating,
-            platforms:gamedb.platforms && gamedb.platforms.map(e => e.name)
-            
+            platforms:gamedb.platforms && gamedb.platforms.map(e => e.name),
+            stores: []
         }
         console.log(gamedb)
         if(game) return res.json(game);
@@ -43,14 +43,14 @@ router.get('/:id', async (req,res)=>{
               released: gameapi.data.released,
               rating:gameapi.data.rating,
               platforms:gameapi.data.platforms && gameapi.data.platforms.map((p) =>
-              p.platform.name).filter(p => p != null)
+              p.platform.name).filter(p => p != null),
+              stores:gameapi.data.stores && gameapi.data.stores.map(e => {return {name:e.store.name,domain:e.store.domain}})
           }
+          
           res.json(game)
-       }
-
-       
-  
-    }catch{
+       } 
+    }
+    catch{
       return res.status(404).send('No existe el juego')
     }}
     

@@ -26,8 +26,9 @@ function Landing(){
                 <div className="imagen2"><img src={img7} Style={'transform:translateX(-40%);width:400%'} alt="" /></div>
                 <div className="imagen1"><img src={img8} Style={'transform:translateX(-60%);width:400%'} alt="" /></div>
             </div>
-            <h1>ARE YOU READY FOR A NEW ADVENTURE?</h1>
+            <h1 className="areuready">ARE YOU READY FOR A NEW ADVENTURE?</h1>
             <Link to='/home' className="rayon" Style={`background-image: url(${png})`} >GOO!!!</Link>
+            <span className="linea"></span>
         </div>
     )
 }

@@ -30,9 +30,9 @@ router.post('/', async(req,res) =>{
         await game.addPlatforms(platforms)
                
         await game.addGenres(genres)
-        res.status(201).json({msg:"Creado con esssssito"})
+        res.status(201).json({msg:"Creado con exito"})
     }catch(err){
-        res.status(404).send('errrorrrrr')
+        res.status(404).send(err)
     }
 
 })

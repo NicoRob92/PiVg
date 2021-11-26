@@ -7,5 +7,8 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        notNull:{msg: "This field is requiered"}
+      }
     }},{timestamps: false});
 };

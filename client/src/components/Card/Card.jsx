@@ -8,7 +8,7 @@ export default function ({name , genres , img , id,rating}){
         <Link to={`/videogame/${id}`} className="containerCard" Style={`background-image: url(${img});text-decoration:none;`} >
         <div className='text'>
             <p className="titulo">{name}</p>
-            <p className="generos"> {genres} </p>                   
+            <p className="generos"> {genres.map(e => e + ' ' + '|' + " ")}</p>                   
         </div>
         </Link>
         

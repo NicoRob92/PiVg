@@ -39,7 +39,7 @@ export function getAGame(name) {
     return axios.get(`http://localhost:3001/videogames?name=${name}`)
     .then(response => {
       if(response.data.length !== 0){
-    dispatch({ type: "GET_A_GAME", payload: response.data});
+    dispatch({ type: "GET_A_GAME", payload: response.data});    
      }})}else{
        alert ('Ingrese Juego')
      }
@@ -68,6 +68,15 @@ export function getGenres() {
     return axios.get("http://localhost:3001/genres")
     .then(response => {
     dispatch({ type: "GET_GENRES", payload: response.data});
+    });
+  };      
+};
+
+export function getPlatforms() {    
+  return function(dispatch) {
+    return axios.get("http://localhost:3001/platforms")
+    .then(response => {
+    dispatch({ type: "GET_PLATFORMS", payload: response.data});
     });
   };      
 };

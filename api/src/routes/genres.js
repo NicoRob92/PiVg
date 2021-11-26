@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { Router } = require('express')
 const { API_KEY } = process.env
-const { Genre , Videogame} = require('../db.js');
+const { Genre , Videogame , Platforms} = require('../db.js');
 const router = Router();
 
 
@@ -10,6 +10,7 @@ router.get('/', async (req,res)=>{
 
 
     const generoDb = await Genre.findAll()
+    
    try{
        if(generoDb.length === 0){
        const generoApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`) // Traigo los datos de la api
@@ -22,6 +23,7 @@ router.get('/', async (req,res)=>{
        })
        generoDb = await Genre.findAll()
     }
+    
        res.json(generoDb)
     }
     catch{

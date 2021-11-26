@@ -13,8 +13,13 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique:true,
       validate: {
         notNull: { msg: "field is required" },
+        len:{
+          args:[4,20],
+          msg:"must have a min length of 4 chars"
+        }
       },
     },
     description:{
@@ -22,6 +27,10 @@ module.exports = (sequelize) => {
       allowNull:false,
       validate: {
         notNull: { msg: "field is required" },
+        len:{
+          args:[20,250],
+          msg:"must have a min length of 20 chars, max length 250 chars"
+        }
       },
     },
     released:{

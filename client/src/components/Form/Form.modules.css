@@ -15,8 +15,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 15px; 
-    border: none;
+    border-radius: 2px; 
+    border: double goldenrod;
     width: 65%;
     height: 100%;
     background-color: rgba(1, 8, 8, 0.4);
@@ -32,8 +32,8 @@
     justify-content:space-between;
     width: 40%;   
     color:goldenrod;
-    border:none
-
+   
+   
 
 }
 
@@ -182,11 +182,11 @@
 }
 .divDanger input {
     width: 100%;
-    height: 50%;
-    border:none;    
-    border-radius: 4px;
+    height: 50%;    
    font-family: 'Anton', sans-serif;
    box-shadow: 0px 10px 15px 3px rgba(0,0,0,0.4);
+   border-radius: 2px; 
+    border: double goldenrod;
 }
 .danger{
     font-size: 0.6rem;
@@ -198,6 +198,8 @@
     border-radius: 4px;
     border:none;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.4);
+    border-radius: 2px; 
+    border: double goldenrod;
 }
 
 .divDangerT .danger{
@@ -219,3 +221,63 @@
     height: 100%;
    
 }
+
+.buttons{
+    position: absolute;
+    top:3%;
+    left: 4%;
+}
+.buttons button{
+    border: none;
+    background-color: black;
+    color: goldenrod;
+    font-family: 'Anton', sans-serif;
+    transition: .6s;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.7);
+}
+
+.button button:hover{
+    transform: scale(1.1);
+    transition: .6s;
+}
+
+
+.modal{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(10, 10, 10, 0.86);
+    transition: .6s;
+}
+
+.modalconteiner{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    border: double goldenrod;
+    width: 25%;
+    height: 40%;
+    background-image: url("https://pre00.deviantart.net/b421/th/pre/i/2008/168/2/b/final_fantasy_vii_fanart_03_by_yongkykun.jpg");
+    background-size: 120% 120%;
+    background-position: center;
+    transition: .5s;
+
+}
+.modalconteiner h1{
+ 
+ position: relative;
+ top: 0;
+ left: 0;
+}
+
+
+
+

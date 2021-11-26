@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { postGame } from "../../redux/actions/postGame";
-import { getGenres } from "../../redux/actions";
+import { getGenres, getPlatforms } from "../../redux/actions";
+import { Link } from "react-router-dom";
 import './Form.modules.css'
-import img from './pngegg.png'
+
+
 
 export default function(){
     const dispatch = useDispatch()
@@ -16,8 +18,9 @@ export default function(){
         platforms:[]
 
       })
-    
+      const [modal,setmodal]= useState(false)
       const  genres = useSelector(state => state.genres)
+      const platforms = useSelector(state => state.platforms)
       const [genresLocal,setgenresLocal] = useState([])
       const [errors,seterrors] = useState({
         name:"",
@@ -28,28 +31,20 @@ export default function(){
         platforms:''
 
       })
-      let p = [{id: 1,name: "PC"},
-      {id: 2,name: "PlayStation 5"},
-      {id: 3,name: "PlayStation 4"},
-      {id: 4,name: "Xbox One"},
-      {id: 5,name: "Xbox Series S/X"},
-      {id: 6,name: "iOS"},
-      {id: 7,name: "Android"},
-      {id: 8,name: "Apple Macintosh"},
-      {id: 9,name: "Linux"},
-      {id: 10,name: "Nintendo"},
-    ]
-      const [plats,setplats] = useState([...p])
+     
+      const [plats,setplats] = useState([])
       
       useEffect(() => {
-        dispatch(getGenres())        
+        dispatch(getGenres()) 
+        dispatch(getPlatforms())       
         }, [])
   
       useEffect(() => {
-          setgenresLocal([...genres])      
-          }, [genres]) 
+          setgenresLocal([...genres])   
+          setplats([...platforms])           
+          }, [genres,platforms]) 
           
-  
+          
     
     
    
@@ -122,7 +117,7 @@ export default function(){
 
     
     function plat(id){
-      let pla = p.find(e => e.id === id)
+      let pla = platforms.find(e => e.id === id)
       if(pla) return pla.name
     }
 
@@ -135,13 +130,17 @@ export default function(){
     
     function handleOnClickP(e){     
       let arr = form.platforms.filter(x => x !== e)
-      let index = p.find(x=> x.id === e)
+      let index = platforms.find(x=> x.id === e)
       setplats([...plats,index])
       setform({...form, platforms: arr})      
     }
     
     function handleOnSubmit(e){     
+      handleModalOpen() 
+        e.preventDefault()
        dispatch(postGame(form))
+       e.target.reset()
+       setform({...form,genres:[],platforms:[]})    
     }
     
     function disable(){
@@ -153,37 +152,45 @@ export default function(){
       else return false
     }
 
-    
-    
-    
+   
+    const [show, setShow] = useState(false);
+
+  const handleModalClose = (e) => {
+    setShow(false);
+  };
+
+  const handleModalOpen = () => {
+    setShow(true);
+  };
     
     return (
+      <>
       
-      <form className="container_form" onSubmit={handleOnSubmit}>
-          
+      
+      <form className="container_form" onSubmit={(e) => handleOnSubmit(e)}>
           <div className="container_global">
             <div className="input">
-            <label>Nombre</label>   
+            <label>Name</label>   
             <div className="divDanger">     
-            <input type="text" name="name" value={form.name} onChange={(e) => validateName(e.target.value)}  /> 
+            <input type="text" name="name" onChange={(e) => validateName(e.target.value)}  /> 
             {errors.name ? <p className="danger">{errors.name}</p> : null }
             </div>         
             </div>
             <div className="input">
             <label>Description</label>  
             <div className="divDangerT">          
-            <textarea  type="text" name="description" value={form.description} onChange={(e) => validateDescription(e.target.value)}  />
+            <textarea  type="text" name="description"  onChange={(e) => validateDescription(e.target.value)}  />
             {errors.description ? <p className="danger">{errors.description}</p> : null }
             </div>
             </div>
             <div className="input">
             <label>Released</label>     
-            <input  type="date" name="released" value={form.released}  onChange={(e) => setform({...form,released:e.target.value})} />
+            <input  type="date" name="released" onChange={(e) => setform({...form,released:e.target.value})} />
             </div>
             <div className="input">
             <label>Rating</label>          
             <div className="divDanger">    
-            <input  type="number" max="5" min="0"name="rating" value={form.rating}  onChange={(e) => validateRating(e.target.value)} />
+            <input  type="number" max="5" min="0"name="rating"   onChange={(e) => validateRating(e.target.value)} />
             {errors.rating ? <p className="danger">{errors.rating}</p> : null }
             </div>
             </div>
@@ -199,7 +206,7 @@ export default function(){
             
                <div className="boxGenPlat">
                   {form.genres?.map((e)=> <div>
-                     <button onClick={(x)=> {x.preventDefault();handleOnClickG(e)}}>{gen(e)}</button>
+                     <button onClick={(x)=> handleOnClickG(e)}>{gen(e)}</button>
                       </div>)}
                 </div>
 
@@ -210,22 +217,34 @@ export default function(){
             <label>Platforms</label>          
             <select name="generos" id="1" onChange={(e) => {handlePlatforms(e.target.value)}} >
               <option>Platforms</option>
-            {plats?.map(e => <option key={e.id} value={e.id}>{e.name}</option>)}
+            {plats.map(e => <option key={e.id} value={e.id}>{e.name}</option>)}
             </select>
             </div>
-            
+             
             
             <div className="boxGenPlat">
             {form.platforms?.map(e=>  <div key={e} id={e}>
-              <button onClick={(x)=> { x.preventDefault();handleOnClickP(e)} }>{plat(e)}</button></div>)}
+              <button onClick={(x)=> handleOnClickP(e) }>{plat(e)}</button></div>)}
             </div>             
             </div>
-            <input className="enviar" type="submit" disabled={disable()}/>
+            <input className="enviar" type="submit" disabled={disable()} value="Create"/>
+            <Link to='/home' className="buttons"><button>Back to Home</button></Link>
             </div>
-            <div className="personaje"><img src={img} alt="not found"></img></div>
-          {/* por último agregamos un input type submit que nos servirá para submitear el form y listo
-          homework terminada! */}
+           
+          
         </form>
+
+        <div className="modalglobal"  hidden={!show}>
+        <div className="modal" onClick={handleModalClose}>
+          <div className="modalconteiner">            
+            <h1> Congrats </h1>
+            <h1>you made your own game</h1>
+          </div>
+        </div>
+      </div>
+       </>
         
       )
 }
+
+

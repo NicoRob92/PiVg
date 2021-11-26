@@ -4,23 +4,27 @@ const initialState = {
     oldGames:[],    
     details:{},
     search:[],
-    oldSearch:[],
-    roldSearch:[],
-    roldGames:[],   
-   
+    oldSearch:[],   
+    platforms:[]
 
 
    
   };
+
+
+  let filtrado =[]
   function rootReducer(state = initialState, action) {
     switch ( action.type) {
       /*=========== PEGARLE A LA API ================ LISTO */
       case "GET_GAMES": 
-      return {...state , gamesLoaded:action.payload, oldGames:action.payload, roldGames:action.payload  }    
+      return {...state , gamesLoaded:action.payload, oldGames:action.payload,}    
     case "GET_GENRES":
       return {...state , genres:action.payload} 
+    case "GET_PLATFORMS":
+      return {...state , platforms:action.payload} 
     case "GET_A_GAME":{      
-      return {...state ,gamesLoaded:action.payload, search:action.payload, oldSearch:action.payload, roldSearch:action.payload}
+      filtrado= []
+      return {...state ,gamesLoaded:action.payload, search:action.payload, oldSearch:action.payload}
     }
     case "GET_DETAILS":
       return{...state , details:action.payload}
@@ -34,20 +38,23 @@ const initialState = {
       const search = state.oldSearch
       const searched = state.oldSearch
       if(action.payload === "ALL"){
+        filtrado =[]
+        state = {...state,search:[]}
        return {...state, gamesLoaded : todos}}      
       else{  
         if(state.gamesLoaded !== state.search){
-         let filtrado = games.filter(e => { for(let i=0;i<e.genres.length;i++){
+         filtrado = games.filter(e => { for(let i=0;i<e.genres.length;i++){
          if(e.genres[i] === action.payload) return e}})
       return {...state, gamesLoaded:filtrado} }
        else{         
          if(action.payload === "ALLS") {
+           filtrado=[]
           state = {...state, search:searched}
           return {...state, gamesLoaded:state.search}
          }
-         let filter = search.filter(e => { for(let i=0;i<e.genres.length;i++){
+         filtrado = search.filter(e => { for(let i=0;i<e.genres.length;i++){
           if(e.genres[i] === action.payload) return e}})
-          state = {...state, search:filter}
+          state = {...state, search:filtrado}
           return {...state, gamesLoaded:state.search}
        }
     }
@@ -57,28 +64,36 @@ const initialState = {
       /* -==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
     /* ==========Base de datos O API=============== LISTO */
       case "FILTER_BYDATA":{     
-        if(action.payload === "ALL") {return {...state,gamesLoaded: state.oldGames}}
-        if(action.payload === "API"){          
+        if(action.payload === "ALL") {
+          if(filtrado.length !== 0){
+            return {...state, gamesLoaded: filtrado} 
+          }
+          if(state.search.length !== 0){            
+            return {...state,gamesLoaded: state.oldSearch}
+          }
+          return {...state,gamesLoaded: state.oldGames}}
+        if(action.payload === "API"){   
+            if(filtrado.length !== 0){
+              return {...state, gamesLoaded: filtrado.filter(e=> typeof e.id === 'number')} 
+            }
+            if(state.search.length !== 0 ){
+              state = {...state, gamesLoaded:state.oldSearch}
+              return {...state, gamesLoaded: state.search.filter(e=> typeof e.id === 'number')}  
+            }
             state = {...state, gamesLoaded:state.oldGames}
             return {...state, gamesLoaded: state.gamesLoaded.filter(e=> typeof e.id === 'number')}           
           }
           if(action.payload === "DB"){
+            if(filtrado.length !== 0){              
+              return {...state, gamesLoaded: filtrado.filter(e=> typeof e.id === 'string')}
+            }
+            if(state.search.length !== 0 ){
+              state = {...state, gamesLoaded:state.oldSearch}
+            return {...state, gamesLoaded: state.search.filter(e=> typeof e.id === 'string')}
+            }
           state = {...state, gamesLoaded:state.oldGames}
           return {...state, gamesLoaded: state.gamesLoaded.filter(e=> typeof e.id === 'string')}
-        }}      
-
-        case "FILTER_BYDATA_SEARCH":{     
-          if(action.payload === "ALL") {return {...state,gamesLoaded: state.oldSearch}}
-          if(action.payload === "API"){          
-              state = {...state, gamesLoaded:state.oldSearch}
-              return {...state, gamesLoaded: state.search.filter(e=> typeof e.id === 'number')}           
-            }
-            if(action.payload === "DB"){
-            state = {...state, gamesLoaded:state.oldSearch}
-            return {...state, gamesLoaded: state.search.filter(e=> typeof e.id === 'string')}
-          }}      
-      
-    
+        }}       
       /* =-==-=-=-==-=-==-===-=-==-=-=-==-===--= */
       /* ==================ORDENAR============== */
       case "ORDER_BY_NAME": {

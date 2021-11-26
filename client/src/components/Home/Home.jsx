@@ -71,8 +71,8 @@ export default function Home(){
             <div>
                <select onChange={e=> {e.preventDefault();handleFilter(e.target.value);setcurrentP(1)}}>
                    {/* TODOS GENEROS */}
-                  {games === search ? <><option key="allg" value="ALL">Generos</option>
-                  <option key = "all" value="ALLS">Todos</option></> : <option key="allg" value="ALL">Generos</option>}
+                  {games === search ? <><option key="allg" value="ALL">Genres</option>
+                  <option key = "all" value="ALLS">All</option></> : <option key="allg" value="ALL">Genres</option>}
                   
                     {/* MAP DE GENEROS */}
                   {games !== search ? genres.map(e => <option key={e.id} value={e.name}>{e.name}</option>) : (generosF.map(e => <option key={e} value={e}>{e}</option>)  )}
@@ -82,16 +82,11 @@ export default function Home(){
              {/*   Existente o agregado */}
               <select onChange={e=> handleByData(e.target.value)}>
                    <option key="all origin" value = "ALL">All</option>
-                   <option key="db" value = "DB">Creado</option>
-                   <option key="api" value = "API">Existente</option>
-               </select> 
-               <select onChange={e=> dispatch(filterByDataSearch(e.target.value))}>
-                   <option key="all origin" value = "ALL">All Search</option>
-                   <option key="db" value = "DB">Creado</option>
-                   <option key="api" value = "API">Existente</option>
-               </select> 
+                   <option key="db" value = "DB">Created</option>
+                   <option key="api" value = "API">Fetched</option>
+               </select>              
                <select onChange={e=> handleSort(e.target.value)}>
-                   <option key="alf" value = "ALL">Alfabeticamente</option>
+                   <option key="alf" value = "ALL">Name</option>
                    <option key= "az"value = "A-Z">A - Z</option>
                    <option key= "za"value = "Z-A">Z - A</option>
                </select>

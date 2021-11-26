@@ -26,7 +26,8 @@ router.get('/', async (req,res)=>{
                     genres:e.genres && e.genres.map((p) =>
                     p.name).filter(p => p != null),
                     rating:e.rating,
-                    background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0"
+                    background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0",
+                    platforms:gamedb.platforms && gamedb.platforms.map(e => e.name)
             }})
             games = games.filter(e => e.genres.length !== 0)
             games = games.sort((a,b)=> a.id-b.id)
@@ -66,8 +67,27 @@ router.get('/', async (req,res)=>{
         let gamedb = await Videogame.findAll({include:Genre})
         
         let total = await Promise.all(games(100))
+
+       /*  let platforms = total.map(e => data.results.platforms && e.data.platforms.map((p) =>
+        p.platform.name).filter(p => p != null)) */
+        
+
         let total2 =[]
         total= total.map(e => e.data.results.map(r => total2.push(r)))  
+        
+        let platforms = total2.map(e => e.platforms.map((p) =>
+              p.platform.name).filter(p => p != null))
+
+        platforms = platforms.flat()
+        
+        let platsFinal = new Set (platforms)
+        console.log(platsFinal)
+        for(const plat of platsFinal){
+            Platforms.findOrCreate({where:{
+                name:plat
+            }})
+        }
+
         total2 = total2.concat(gamedb)
 
        
@@ -78,7 +98,7 @@ router.get('/', async (req,res)=>{
                 rating:e.rating,                  
                 genres:e.genres && e.genres.map((p) =>
                 p.name).filter(p => p != null),
-                background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0"
+                background_image:e.background_image || "https://th.bing.com/th/id/R.2759aec8140a34b8bda8b89458ac73e7?rik=EguoRhg7o7GSOw&pid=ImgRaw&r=0",
                 
         }})
         games2= games2.sort((a,b)=> a.id-b.id)
